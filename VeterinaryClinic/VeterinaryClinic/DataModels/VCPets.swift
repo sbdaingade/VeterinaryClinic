@@ -7,17 +7,13 @@
 
 import Foundation
 
-// MARK: - Pets
-struct Pets: Codable {
+public struct VCPets: Codable {
     let pets: [Pet]
-
-    enum CodingKeys: String, CodingKey {
-        case pets = "Pets"
-    }
 }
 
 // MARK: - Pet
-struct Pet: Codable {
+public struct Pet: Codable , Identifiable{
+    public var id = UUID().uuidString
     let imageURL: String
     let title: String
     let contentURL: String

@@ -11,7 +11,9 @@ import SwiftUI
 struct VeterinaryClinicApp: App {
     var body: some Scene {
         WindowGroup {
-            HomeView()
+            NavigationView {
+                HomeView()
+            }
         }
     }
 }
