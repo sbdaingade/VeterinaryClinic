@@ -16,6 +16,7 @@ protocol PetsNetworkProtocol {
     static func getPets(completion: @escaping (Result<VCPets,Error>) -> Void)
 }
 
+// MARK: Write Code here for real API
 final class PetsNetwork: PetsNetworkProtocol {
     static func getPets(completion: @escaping (Result<VCPets, Error>) -> Void) {
     }

@@ -12,6 +12,7 @@ protocol ConfigNetworkProtocol {
     static func getConfigData(completion: @escaping (Result<VCConfiguration,Error>) -> Void)
 }
 
+// MARK: Write Code here for real API
 public final class ConfigNetwork: ConfigNetworkProtocol {
     static func getConfigData(completion: @escaping (Result<VCConfiguration, Error>) -> Void) {
     }

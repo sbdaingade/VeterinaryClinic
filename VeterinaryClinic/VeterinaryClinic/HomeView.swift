@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct HomeView: View {
+    @State private var showAlert: Bool = false
     
     @StateObject var homeViewModel = HomeViewModel()
     var body: some View {
@@ -21,6 +22,10 @@ struct HomeView: View {
             }
             .padding(EdgeInsets(top: 0, leading: 12, bottom: 0, trailing: 12))
             .navigationTitle("Home")
+            
+            .alert(isPresented: self.$showAlert, content: {
+                Alert(title: Text("Thank you for getting in touch with us. We’ll get back to you as soon as possible"))
+            })
             .onAppear {
                 homeViewModel.input = .getConfiguration
                 homeViewModel.input = .getPets
@@ -35,6 +40,7 @@ struct HomeView: View {
                         
                         Button(action: {
                             // TODO: ...
+                            showAlert.toggle()
                         }) {
                             HStack {
                                 Spacer()
@@ -52,6 +58,8 @@ struct HomeView: View {
                         
                         Button(action: {
                             // TODO: ...
+                            showAlert.toggle()
+                            
                         }) {
                             HStack {
                                 Spacer()
