@@ -7,9 +7,21 @@
 
 import Foundation
 
-public enum VCError: Error {
+public enum VCError: Error, CustomStringConvertible {
     case failToGetResponse
     case failToDecode
+    case customError(Error)
+    
+    public var description: String {
+        switch self {
+        case .failToGetResponse:
+            return "fail to get response"
+        case .failToDecode:
+            return "Fail to decode"
+        case .customError(let error):
+            return error.localizedDescription
+        }
+    }
 }
 
 protocol PetsNetworkProtocol {

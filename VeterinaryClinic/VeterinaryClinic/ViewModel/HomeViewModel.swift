@@ -58,6 +58,60 @@ public class HomeViewModel: ObservableObject {
         }
     }
     
+    
+    func validateWithInOfficeTime() -> Bool {
+        //"workHours": "M-F 9:00 - 18:00"
+        let now = Date()
+        
+        let settings = config?.settings.workHours
+        guard let hRange = settings?.components(separatedBy: " ") else { return false }
+        
+        let components = Calendar.current.dateComponents([.weekday], from: now)
+        let weekday = components.weekday ?? 0
+        
+        switch weekday {
+        case 2...6:
+            debugPrint("Working day")
+        case 1:
+            debugPrint("Not Working Day")
+            return false
+        case 7:
+            debugPrint("Not Working Day")
+            return false
+        default:
+            break
+        }
+        
+        let startTimeArray = hRange[1].components(separatedBy: ":")
+        let sSettingHour = Int(startTimeArray.first!)
+        let sMinute =  Int(startTimeArray.last!)
+        
+        let calendar = Calendar.current
+        let min_today = calendar.date(
+            bySettingHour: sSettingHour!,
+            minute: sMinute!,
+            second: 0,
+            of: now)!
+        
+        let maxTimeArray =  hRange.last!.components(separatedBy: ":")
+        let mSettingHour = Int(maxTimeArray.first!)
+        let mMinute =  Int(maxTimeArray.last!)
+        
+        let max_today = calendar.date(
+            bySettingHour: mSettingHour!,
+            minute: mMinute!,
+            second: 0,
+            of: now)!
+        
+        if now >= min_today && now <= max_today  {
+            debugPrint("The time is between \(startTimeArray) and \(maxTimeArray)")
+            return true
+        } else {
+            debugPrint("Not within the time  \(startTimeArray) and \(maxTimeArray)")
+            return false
+        }
+    }
+    
     deinit {
         cancallables.forEach{$0.cancel()}
     }

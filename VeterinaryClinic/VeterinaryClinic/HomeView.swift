@@ -9,6 +9,7 @@ import SwiftUI
 
 struct HomeView: View {
     @State private var showAlert: Bool = false
+    @State private var msg: String = ""
     
     @StateObject var homeViewModel = HomeViewModel()
     var body: some View {
@@ -24,11 +25,13 @@ struct HomeView: View {
             .navigationTitle("Home")
             
             .alert(isPresented: self.$showAlert, content: {
-                Alert(title: Text("Thank you for getting in touch with us. We’ll get back to you as soon as possible"))
+                Alert(title: Text("\(msg)"))
             })
             .onAppear {
-                homeViewModel.input = .getConfiguration
-                homeViewModel.input = .getPets
+                if homeViewModel.pets.count == 0 {
+                    homeViewModel.input = .getPets
+                    homeViewModel.input = .getConfiguration
+                }
             }
         }
     }
@@ -41,6 +44,7 @@ struct HomeView: View {
                         Button(action: {
                             // TODO: ...
                             showAlert.toggle()
+                            msg =     homeViewModel.validateWithInOfficeTime() ? "Thank you for getting in touch with us. We’ll get back to you as soon as possible" : "Work hours has ended. Please contact us again on the next work day"
                         }) {
                             HStack {
                                 Spacer()
@@ -59,7 +63,7 @@ struct HomeView: View {
                         Button(action: {
                             // TODO: ...
                             showAlert.toggle()
-                            
+                            msg =     homeViewModel.validateWithInOfficeTime() ? "Thank you for getting in touch with us. We’ll get back to you as soon as possible" : "Work hours has ended. Please contact us again on the next work day"
                         }) {
                             HStack {
                                 Spacer()

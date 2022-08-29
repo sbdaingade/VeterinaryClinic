@@ -10,14 +10,21 @@ import SwiftUI
 struct PetCellView: View {
     
     let pet: Pet
-    
     var body: some View {
         ZStack {
             HStack(alignment: .center) {
-                Image(systemName: "photo.artframe")
-                    .resizable()
-                    .aspectRatio(contentMode: .fit)
-                    .frame(width:80, height:80)
+                AsyncImage(
+                    url: pet.imageURL,
+                    placeholder: { Image(systemName: "photo.artframe")
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
+                        .frame(width:80, height:80) },
+                    image: { Image(uiImage: $0).resizable()
+                            
+                    }
+                )
+                .frame(width:80, height:80)
+                .cornerRadius(8)
                 
                 Text(pet.title)
                     .multilineTextAlignment(.leading)
