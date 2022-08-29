@@ -13,7 +13,7 @@ public class HomeViewModel: ObservableObject {
     private var cancallables = Set<AnyCancellable>()
     @Published public private(set) var config: VCConfiguration?
     @Published public private(set) var pets = [Pet]()
-
+    
     public enum Input {
         case getConfiguration
         case getPets
@@ -26,7 +26,7 @@ public class HomeViewModel: ObservableObject {
             switch action {
             case .getConfiguration:
                 self.getConfigurationSettings()
-             case.getPets:
+            case.getPets:
                 self.getAllPets()
             }
         } .store(in: &cancallables)
@@ -58,13 +58,12 @@ public class HomeViewModel: ObservableObject {
         }
     }
     
-    
-    func validateWithInOfficeTime() -> Bool {
+    //MARK: check validation for Office Time
+    func validateWithInOfficeTime() -> String {
         //"workHours": "M-F 9:00 - 18:00"
         let now = Date()
-        
         let settings = config?.settings.workHours
-        guard let hRange = settings?.components(separatedBy: " ") else { return false }
+        guard let hRange = settings?.components(separatedBy: " ") else { return "Work hours has ended. Please contact us again on the next work day" }
         
         let components = Calendar.current.dateComponents([.weekday], from: now)
         let weekday = components.weekday ?? 0
@@ -74,10 +73,10 @@ public class HomeViewModel: ObservableObject {
             debugPrint("Working day")
         case 1:
             debugPrint("Not Working Day")
-            return false
+            return  "Work hours has ended. Please contact us again on the next work day"
         case 7:
             debugPrint("Not Working Day")
-            return false
+            return "Work hours has ended. Please contact us again on the next work day"
         default:
             break
         }
@@ -105,10 +104,10 @@ public class HomeViewModel: ObservableObject {
         
         if now >= min_today && now <= max_today  {
             debugPrint("The time is between \(startTimeArray) and \(maxTimeArray)")
-            return true
+            return "Thank you for getting in touch with us. We’ll get back to you as soon as possible"
         } else {
             debugPrint("Not within the time  \(startTimeArray) and \(maxTimeArray)")
-            return false
+            return "Work hours has ended. Please contact us again on the next work day"
         }
     }
     

@@ -44,7 +44,7 @@ struct HomeView: View {
                         Button(action: {
                             // TODO: ...
                             showAlert.toggle()
-                            msg =     homeViewModel.validateWithInOfficeTime() ? "Thank you for getting in touch with us. We’ll get back to you as soon as possible" : "Work hours has ended. Please contact us again on the next work day"
+                            msg = homeViewModel.validateWithInOfficeTime()
                         }) {
                             HStack {
                                 Spacer()
@@ -63,7 +63,7 @@ struct HomeView: View {
                         Button(action: {
                             // TODO: ...
                             showAlert.toggle()
-                            msg =     homeViewModel.validateWithInOfficeTime() ? "Thank you for getting in touch with us. We’ll get back to you as soon as possible" : "Work hours has ended. Please contact us again on the next work day"
+                            msg = homeViewModel.validateWithInOfficeTime()
                         }) {
                             HStack {
                                 Spacer()
