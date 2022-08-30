@@ -18,7 +18,28 @@ class PetsTest: XCTestCase {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
     }
 
-    func testGetPets() {
+    
+    func testAPIGetPets() {
+        let expec = expectation(description: "test Pets request")
+        PetsNetwork.getPets { result in
+            switch result {
+            case .failure(let error):
+                XCTFail("Pets request failed \(error.localizedDescription)")
+                expec.fulfill()
+            case .success(let Pets):
+                print("Pets success \(Pets.pets.count )")
+                expec.fulfill()
+            }
+        }
+        
+        waitForExpectations(timeout: 10.0) { error in
+            if let error = error {
+                print("Error: \(error.localizedDescription)")
+            }
+        }
+    }
+    
+    func testMockGetPets() {
         let expec = expectation(description: "test Pets request")
         TestPetsNetwork.getPets { result in
             switch result {

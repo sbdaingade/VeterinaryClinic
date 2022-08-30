@@ -33,7 +33,7 @@ public class HomeViewModel: ObservableObject {
     }
     
     private func getConfigurationSettings() {
-        TestConfigNetwork.getConfigData { result in
+        ConfigNetwork.getConfigData { result in
             switch result {
             case .success(let conf):
                 DispatchQueue.main.async {[unowned self] in
@@ -46,7 +46,7 @@ public class HomeViewModel: ObservableObject {
     }
     
     private func getAllPets() {
-        TestPetsNetwork.getPets { result in
+        PetsNetwork.getPets { result in
             switch result {
             case .success(let pets):
                 DispatchQueue.main.async {[unowned self] in

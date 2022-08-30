@@ -30,7 +30,29 @@ protocol PetsNetworkProtocol {
 
 // MARK: Write Code here for real API
 final class PetsNetwork: PetsNetworkProtocol {
+    
     static func getPets(completion: @escaping (Result<VCPets, Error>) -> Void) {
+        var request = URLRequest(url: URL(string: "https://api.npoint.io/89bc67a9845e640ae6ce")!,timeoutInterval: Double.infinity)
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.httpMethod = "GET"
+        let defaultConfiguration = URLSessionConfiguration.default
+        defaultConfiguration.waitsForConnectivity = true
+        defaultConfiguration.timeoutIntervalForRequest = 300
+        let sharedSession = URLSession(configuration: defaultConfiguration)
+        
+        sharedSession.dataTask(with: request) { data,response,error in
+            if error != nil {
+                completion(.failure(VCError.customError(error!)))
+                return
+            }
+            do {
+                let pets = try JSONDecoder().decode(VCPets.self, from: data!)
+                completion(.success(pets))
+                
+            } catch let error {
+                completion(.failure(VCError.customError(error)))
+            }
+        }.resume()
     }
 }
 
