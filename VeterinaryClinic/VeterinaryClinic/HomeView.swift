@@ -27,8 +27,12 @@ struct HomeView: View {
             .alert(isPresented: self.$showAlert, content: {
                 Alert(title: Text("\(msg)"))
             })
+            .onLoadingState(homeViewModel.$loadingState) {
+                ActivityIndicator()
+            }
             .onAppear {
                 if homeViewModel.pets.count == 0 {
+                    
                     homeViewModel.input = .getPets
                     homeViewModel.input = .getConfiguration
                 }

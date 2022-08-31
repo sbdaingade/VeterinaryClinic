@@ -9,12 +9,17 @@ import Foundation
 
 
 protocol ConfigNetworkProtocol {
-    static func getConfigData(completion: @escaping (Result<VCConfiguration,Error>) -> Void)
+    static func getConfigData(completion: @escaping (Result<VCConfiguration,VCError>) -> Void)
 }
 
 // MARK: Write Code here for real API
 public final class ConfigNetwork: ConfigNetworkProtocol {
-    static func getConfigData(completion: @escaping (Result<VCConfiguration, Error>) -> Void) {
+    static func getConfigData(completion: @escaping (Result<VCConfiguration, VCError>) -> Void) {
+      
+        if InternetMonitor.shared.isConnected != true {
+            completion(.failure(VCError.internetIssue))
+            return
+        }
         var request = URLRequest(url: URL(string: "https://api.npoint.io/70b567adac1d0b60689b")!,timeoutInterval: Double.infinity)
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         request.httpMethod = "GET"
@@ -41,7 +46,7 @@ public final class ConfigNetwork: ConfigNetworkProtocol {
 
 // MARK: Fetch Mock Data
 public final class TestConfigNetwork: ConfigNetworkProtocol {
-    static func getConfigData(completion: @escaping (Result<VCConfiguration, Error>) -> Void) {
+    static func getConfigData(completion: @escaping (Result<VCConfiguration, VCError>) -> Void) {
         guard let config = ConfigMockGenerator().config  else {
             completion(.failure(VCError.failToGetResponse))
             return

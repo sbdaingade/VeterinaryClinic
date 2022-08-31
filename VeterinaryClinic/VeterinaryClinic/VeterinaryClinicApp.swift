@@ -9,10 +9,14 @@ import SwiftUI
 
 @main
 struct VeterinaryClinicApp: App {
+
     var body: some Scene {
         WindowGroup {
             NavigationView {
                 HomeView()
+            }
+            .onAppear {
+                InternetMonitor.shared.startMonitoring()
             }
         }
     }

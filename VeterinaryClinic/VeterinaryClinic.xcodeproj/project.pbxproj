@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4A04069728BF002E0021D82A /* InternetMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A04069628BF002E0021D82A /* InternetMonitor.swift */; };
+		4A04069D28BF2D440021D82A /* LoadingStates.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A04069C28BF2D440021D82A /* LoadingStates.swift */; };
+		4A04069F28BF34D90021D82A /* LoadingStateViewModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A04069E28BF34D90021D82A /* LoadingStateViewModifier.swift */; };
+		4A0406A128BF37710021D82A /* ActivityIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A0406A028BF37710021D82A /* ActivityIndicator.swift */; };
 		4A8DB02928BCF965009C0367 /* ImageLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A8DB02828BCF965009C0367 /* ImageLoader.swift */; };
 		4A8DB02B28BCFA7F009C0367 /* AsyncImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A8DB02A28BCFA7F009C0367 /* AsyncImage.swift */; };
 		4A8DB02D28BCFB0A009C0367 /* ImageCacheKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A8DB02C28BCFB0A009C0367 /* ImageCacheKey.swift */; };
@@ -52,6 +56,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		4A04069628BF002E0021D82A /* InternetMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InternetMonitor.swift; sourceTree = "<group>"; };
+		4A04069C28BF2D440021D82A /* LoadingStates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingStates.swift; sourceTree = "<group>"; };
+		4A04069E28BF34D90021D82A /* LoadingStateViewModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingStateViewModifier.swift; sourceTree = "<group>"; };
+		4A0406A028BF37710021D82A /* ActivityIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityIndicator.swift; sourceTree = "<group>"; };
 		4A8DB02828BCF965009C0367 /* ImageLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageLoader.swift; sourceTree = "<group>"; };
 		4A8DB02A28BCFA7F009C0367 /* AsyncImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncImage.swift; sourceTree = "<group>"; };
 		4A8DB02C28BCFB0A009C0367 /* ImageCacheKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCacheKey.swift; sourceTree = "<group>"; };
@@ -107,6 +115,24 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4A04069528BEFF680021D82A /* InternetMonitor */ = {
+			isa = PBXGroup;
+			children = (
+				4A04069628BF002E0021D82A /* InternetMonitor.swift */,
+			);
+			path = InternetMonitor;
+			sourceTree = "<group>";
+		};
+		4A04069B28BF2D1F0021D82A /* ViewModifiers */ = {
+			isa = PBXGroup;
+			children = (
+				4A04069C28BF2D440021D82A /* LoadingStates.swift */,
+				4A04069E28BF34D90021D82A /* LoadingStateViewModifier.swift */,
+				4A0406A028BF37710021D82A /* ActivityIndicator.swift */,
+			);
+			path = ViewModifiers;
+			sourceTree = "<group>";
+		};
 		4A8DB02528BCCAA3009C0367 /* CacheImage */ = {
 			isa = PBXGroup;
 			children = (
@@ -141,6 +167,8 @@
 		4AC9390C28BA364500100D75 /* VeterinaryClinic */ = {
 			isa = PBXGroup;
 			children = (
+				4A04069B28BF2D1F0021D82A /* ViewModifiers */,
+				4A04069528BEFF680021D82A /* InternetMonitor */,
 				4A8DB02528BCCAA3009C0367 /* CacheImage */,
 				4AC9396128BA5CC700100D75 /* Cells */,
 				4AC9394728BA41AA00100D75 /* MockJSON */,
@@ -371,6 +399,7 @@
 			files = (
 				4AC9391028BA364600100D75 /* HomeView.swift in Sources */,
 				4AC9396328BA5E3400100D75 /* PetCellView.swift in Sources */,
+				4A04069D28BF2D440021D82A /* LoadingStates.swift in Sources */,
 				4AC9395E28BA585800100D75 /* ConfigNetwork.swift in Sources */,
 				4AC9394F28BA42F900100D75 /* ConfigMockGenerator.swift in Sources */,
 				4AC9393B28BA378100100D75 /* VCConfiguration.swift in Sources */,
@@ -381,8 +410,11 @@
 				4A8DB02B28BCFA7F009C0367 /* AsyncImage.swift in Sources */,
 				4A8DB02F28BCFC33009C0367 /* ImageCache.swift in Sources */,
 				4AC9394D28BA426400100D75 /* PetsMockGenerator.swift in Sources */,
+				4A04069728BF002E0021D82A /* InternetMonitor.swift in Sources */,
 				4AC9396528BA69F600100D75 /* PetDetailView.swift in Sources */,
 				4AC9394328BA3E2800100D75 /* PetsNetwork.swift in Sources */,
+				4A0406A128BF37710021D82A /* ActivityIndicator.swift in Sources */,
+				4A04069F28BF34D90021D82A /* LoadingStateViewModifier.swift in Sources */,
 				4A8DB02D28BCFB0A009C0367 /* ImageCacheKey.swift in Sources */,
 				4AC9390E28BA364600100D75 /* VeterinaryClinicApp.swift in Sources */,
 			);

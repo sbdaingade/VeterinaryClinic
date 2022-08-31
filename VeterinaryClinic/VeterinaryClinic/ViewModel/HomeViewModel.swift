@@ -13,6 +13,8 @@ public class HomeViewModel: ObservableObject {
     private var cancallables = Set<AnyCancellable>()
     @Published public private(set) var config: VCConfiguration?
     @Published public private(set) var pets = [Pet]()
+    @Published public private(set) var loadingState: LoadingStates = LoadingStates.idle
+
     
     public enum Input {
         case getConfiguration
@@ -33,26 +35,33 @@ public class HomeViewModel: ObservableObject {
     }
     
     private func getConfigurationSettings() {
-        ConfigNetwork.getConfigData { result in
+        loadingState = .loading
+        ConfigNetwork.getConfigData {[weak self] result in
             switch result {
             case .success(let conf):
-                DispatchQueue.main.async {[unowned self] in
-                    self.config = conf
+                DispatchQueue.main.async {
+                    self?.config = conf
+                    self?.loadingState = .idle
                 }
             case .failure(let error):
+                self?.loadingState = .failed(error.description)
                 debugPrint("\(error.localizedDescription)")
             }
         }
     }
     
     private func getAllPets() {
-        PetsNetwork.getPets { result in
+        loadingState = .loading
+
+        PetsNetwork.getPets {[weak self] result in
             switch result {
             case .success(let pets):
-                DispatchQueue.main.async {[unowned self] in
-                    self.pets = pets.pets
+                DispatchQueue.main.async {
+                    self?.pets = pets.pets
+                    self?.loadingState = .idle
                 }
             case .failure(let error):
+                self?.loadingState = .failed(error.description)
                 debugPrint("\(error.localizedDescription)")
             }
         }

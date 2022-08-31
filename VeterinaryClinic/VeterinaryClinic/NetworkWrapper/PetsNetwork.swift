@@ -11,6 +11,7 @@ public enum VCError: Error, CustomStringConvertible {
     case failToGetResponse
     case failToDecode
     case customError(Error)
+    case internetIssue
     
     public var description: String {
         switch self {
@@ -18,6 +19,8 @@ public enum VCError: Error, CustomStringConvertible {
             return "fail to get response"
         case .failToDecode:
             return "Fail to decode"
+        case  .internetIssue:
+            return "Check internet connection"
         case .customError(let error):
             return error.localizedDescription
         }
@@ -25,13 +28,19 @@ public enum VCError: Error, CustomStringConvertible {
 }
 
 protocol PetsNetworkProtocol {
-    static func getPets(completion: @escaping (Result<VCPets,Error>) -> Void)
+    static func getPets(completion: @escaping (Result<VCPets,VCError>) -> Void)
 }
 
 // MARK: Write Code here for real API
 final class PetsNetwork: PetsNetworkProtocol {
     
-    static func getPets(completion: @escaping (Result<VCPets, Error>) -> Void) {
+    static func getPets(completion: @escaping (Result<VCPets, VCError>) -> Void) {
+        
+         if InternetMonitor.shared.isConnected != true {
+             completion(.failure(VCError.internetIssue))
+            return
+        }
+        
         var request = URLRequest(url: URL(string: "https://api.npoint.io/89bc67a9845e640ae6ce")!,timeoutInterval: Double.infinity)
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         request.httpMethod = "GET"
@@ -58,7 +67,7 @@ final class PetsNetwork: PetsNetworkProtocol {
 
 // MARK: Fetch Mock Data 
 public final class TestPetsNetwork: PetsNetworkProtocol {
-    static func getPets(completion: @escaping (Result<VCPets, Error>) -> Void) {
+    static func getPets(completion: @escaping (Result<VCPets, VCError>) -> Void) {
         guard let pets = PetsMockGenerator().pets  else {
             completion(.failure(VCError.failToGetResponse))
             return
