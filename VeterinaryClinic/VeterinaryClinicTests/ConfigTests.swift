@@ -17,7 +17,7 @@ class ConfigTests: XCTestCase {
     override func tearDownWithError() throws {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
     }
-    
+    //MARK: API GetConfigData
     func testAPIGetConfigData() {
         let expec = expectation(description: "test ConfigData request")
         ConfigNetwork.getConfigData { result in
@@ -38,6 +38,29 @@ class ConfigTests: XCTestCase {
         }
     }
     
+    func testCheckInternet() {
+        let expec = expectation(description: "test ConfigData request")
+        ConfigNetwork.getConfigData { result in
+            switch result {
+            case .failure(let error):
+                print("Internet connection \(error.description )")
+                expec.fulfill()
+            case .success(let config):
+                expec.fulfill()
+                XCTFail("Internet connection is working \(config.settings)")
+
+            }
+        }
+        
+        waitForExpectations(timeout: 10.0) { error in
+            if let error = error {
+                print("Error: \(error.localizedDescription)")
+            }
+        }
+    }
+    
+    
+    //MARK: API Mock GetConfigData
 
     func testMockGetConfigData() {
         let expec = expectation(description: "test ConfigData request")

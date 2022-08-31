@@ -39,6 +39,28 @@ class PetsTest: XCTestCase {
         }
     }
     
+    
+    
+    func testCheckInternet() {
+        let expec = expectation(description: "test Internet connection request")
+        PetsNetwork.getPets { result in
+            switch result {
+            case .failure(let error):
+                print("Internet connection \(error.description )")
+                expec.fulfill()
+            case .success(let pet):
+                expec.fulfill()
+                XCTFail("Internet connection is working \(pet)")
+            }
+        }
+        
+        waitForExpectations(timeout: 10.0) { error in
+            if let error = error {
+                print("Error: \(error.localizedDescription)")
+            }
+        }
+    }
+    
     func testMockGetPets() {
         let expec = expectation(description: "test Pets request")
         TestPetsNetwork.getPets { result in

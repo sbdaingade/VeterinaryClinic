@@ -19,6 +19,7 @@ public class HomeViewModel: ObservableObject {
     public enum Input {
         case getConfiguration
         case getPets
+        case getMockConfiguration
     }
     
     @Published public var input: Input?
@@ -29,6 +30,8 @@ public class HomeViewModel: ObservableObject {
             case .getConfiguration:
                 self.getConfigurationSettings()
             case.getPets:
+                self.getAllPets()
+            case .getMockConfiguration:
                 self.getAllPets()
             }
         } .store(in: &cancallables)
@@ -58,6 +61,22 @@ public class HomeViewModel: ObservableObject {
             case .success(let pets):
                 DispatchQueue.main.async {
                     self?.pets = pets.pets
+                    self?.loadingState = .idle
+                }
+            case .failure(let error):
+                self?.loadingState = .failed(error.description)
+                debugPrint("\(error.localizedDescription)")
+            }
+        }
+    }
+    
+    private func getMockConfigurationSettings() {
+        loadingState = .loading
+        ConfigNetwork.getConfigData {[weak self] result in
+            switch result {
+            case .success(let conf):
+                DispatchQueue.main.async {
+                    self?.config = conf
                     self?.loadingState = .idle
                 }
             case .failure(let error):
