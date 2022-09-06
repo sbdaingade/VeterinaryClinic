@@ -8,8 +8,6 @@
 import SwiftUI
 
 struct HomeView: View {
-    @State private var showAlert: Bool = false
-    @State private var msg: String = ""
     
     @StateObject var homeViewModel = HomeViewModel()
     var body: some View {
@@ -23,20 +21,16 @@ struct HomeView: View {
             }
             .padding(EdgeInsets(top: 0, leading: 12, bottom: 0, trailing: 12))
             .navigationTitle("Home")
-            
-            .alert(isPresented: self.$showAlert, content: {
-                Alert(title: Text("\(msg)"))
-            })
             .onLoadingState(homeViewModel.$loadingState) {
                 ActivityIndicator()
             }
             .onAppear {
                 if homeViewModel.pets.count == 0 {
-                    
                     homeViewModel.input = .getPets
                     homeViewModel.input = .getConfiguration
                 }
             }
+            
         }
     }
     @ViewBuilder private func sectionHeaderView(view: VCConfiguration?) -> some View {
@@ -47,8 +41,10 @@ struct HomeView: View {
                         
                         Button(action: {
                             // TODO: ...
-                            showAlert.toggle()
-                            msg = homeViewModel.validateWithInOfficeTime()
+                          let msg = homeViewModel.validateWithInOfficeTime(workingHours: (homeViewModel.config?.settings.workHours)!, currentDate: Date()) == true ? WorkingHours.withInTheOfficeTime.description :  WorkingHours.afterTheOfficeTime.description
+                            homeViewModel.input =  .showAlert("Working Hour", msg)
+                            
+                            
                         }) {
                             HStack {
                                 Spacer()
@@ -66,8 +62,11 @@ struct HomeView: View {
                         
                         Button(action: {
                             // TODO: ...
-                            showAlert.toggle()
-                            msg = homeViewModel.validateWithInOfficeTime()
+                           let msg = homeViewModel.validateWithInOfficeTime(workingHours: (homeViewModel.config?.settings.workHours)!, currentDate: Date()) == true ? WorkingHours.withInTheOfficeTime.description :  WorkingHours.afterTheOfficeTime.description
+                            debugPrint(msg)
+                            homeViewModel.input =  .showAlert("Working Hour", msg)
+
+
                         }) {
                             HStack {
                                 Spacer()

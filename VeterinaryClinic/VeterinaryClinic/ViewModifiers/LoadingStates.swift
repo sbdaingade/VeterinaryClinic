@@ -12,6 +12,7 @@ public enum LoadingStates : Equatable {
     case idle
     case loading
     case failed(String)
+    case infoMessage(String,String)
 }
 
 public struct IdentifiableObject<T: Hashable>: Identifiable {

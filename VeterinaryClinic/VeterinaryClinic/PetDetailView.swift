@@ -19,5 +19,4 @@ struct PetDetailView: UIViewRepresentable {
         let request = URLRequest(url: URL(string: pet.contentURL)!)
         webView.load(request)
     }
-    
 }

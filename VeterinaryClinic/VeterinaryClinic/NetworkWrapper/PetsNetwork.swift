@@ -64,15 +64,3 @@ final class PetsNetwork: PetsNetworkProtocol {
         }.resume()
     }
 }
-
-// MARK: Fetch Mock Data 
-public final class TestPetsNetwork: PetsNetworkProtocol {
-    static func getPets(completion: @escaping (Result<VCPets, VCError>) -> Void) {
-        guard let pets = PetsMockGenerator().pets  else {
-            completion(.failure(VCError.failToGetResponse))
-            return
-        }
-        debugPrint("\(pets.pets.count)")
-        completion(.success(pets))
-    }
-}

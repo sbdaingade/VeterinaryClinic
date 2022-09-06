@@ -43,15 +43,3 @@ public final class ConfigNetwork: ConfigNetworkProtocol {
         }.resume()
     }
 }
-
-// MARK: Fetch Mock Data
-public final class TestConfigNetwork: ConfigNetworkProtocol {
-    static func getConfigData(completion: @escaping (Result<VCConfiguration, VCError>) -> Void) {
-        guard let config = ConfigMockGenerator().config  else {
-            completion(.failure(VCError.failToGetResponse))
-            return
-        }
-        debugPrint("\(config.settings)")
-        completion(.success(config))
-    }
-}

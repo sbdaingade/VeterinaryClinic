@@ -25,11 +25,6 @@
 		4AC9393928BA375400100D75 /* VCPets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AC9393828BA375400100D75 /* VCPets.swift */; };
 		4AC9393B28BA378100100D75 /* VCConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AC9393A28BA378100100D75 /* VCConfiguration.swift */; };
 		4AC9394328BA3E2800100D75 /* PetsNetwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AC9394228BA3E2800100D75 /* PetsNetwork.swift */; };
-		4AC9394628BA3FC300100D75 /* MockDataExtractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AC9394528BA3FC300100D75 /* MockDataExtractor.swift */; };
-		4AC9394A28BA41EA00100D75 /* pets.json in Resources */ = {isa = PBXBuildFile; fileRef = 4AC9394828BA41EA00100D75 /* pets.json */; };
-		4AC9394B28BA41EA00100D75 /* config.json in Resources */ = {isa = PBXBuildFile; fileRef = 4AC9394928BA41EA00100D75 /* config.json */; };
-		4AC9394D28BA426400100D75 /* PetsMockGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AC9394C28BA426400100D75 /* PetsMockGenerator.swift */; };
-		4AC9394F28BA42F900100D75 /* ConfigMockGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AC9394E28BA42F900100D75 /* ConfigMockGenerator.swift */; };
 		4AC9395328BA44A100100D75 /* PetsTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AC9395228BA44A100100D75 /* PetsTest.swift */; };
 		4AC9395C28BA56AC00100D75 /* ConfigTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AC9395B28BA56AC00100D75 /* ConfigTests.swift */; };
 		4AC9395E28BA585800100D75 /* ConfigNetwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AC9395D28BA585800100D75 /* ConfigNetwork.swift */; };
@@ -77,11 +72,6 @@
 		4AC9393828BA375400100D75 /* VCPets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VCPets.swift; sourceTree = "<group>"; };
 		4AC9393A28BA378100100D75 /* VCConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VCConfiguration.swift; sourceTree = "<group>"; };
 		4AC9394228BA3E2800100D75 /* PetsNetwork.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetsNetwork.swift; sourceTree = "<group>"; };
-		4AC9394528BA3FC300100D75 /* MockDataExtractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockDataExtractor.swift; sourceTree = "<group>"; };
-		4AC9394828BA41EA00100D75 /* pets.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = pets.json; sourceTree = "<group>"; };
-		4AC9394928BA41EA00100D75 /* config.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = config.json; sourceTree = "<group>"; };
-		4AC9394C28BA426400100D75 /* PetsMockGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetsMockGenerator.swift; sourceTree = "<group>"; };
-		4AC9394E28BA42F900100D75 /* ConfigMockGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigMockGenerator.swift; sourceTree = "<group>"; };
 		4AC9395228BA44A100100D75 /* PetsTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetsTest.swift; sourceTree = "<group>"; };
 		4AC9395B28BA56AC00100D75 /* ConfigTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigTests.swift; sourceTree = "<group>"; };
 		4AC9395D28BA585800100D75 /* ConfigNetwork.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigNetwork.swift; sourceTree = "<group>"; };
@@ -171,8 +161,6 @@
 				4A04069528BEFF680021D82A /* InternetMonitor */,
 				4A8DB02528BCCAA3009C0367 /* CacheImage */,
 				4AC9396128BA5CC700100D75 /* Cells */,
-				4AC9394728BA41AA00100D75 /* MockJSON */,
-				4AC9394428BA3F8000100D75 /* MockDataExtractor */,
 				4AC9394128BA3E1100100D75 /* NetworkWrapper */,
 				4AC9393C28BA3B0300100D75 /* ViewModel */,
 				4AC9393728BA36CA00100D75 /* DataModels */,
@@ -236,25 +224,6 @@
 				4AC9395D28BA585800100D75 /* ConfigNetwork.swift */,
 			);
 			path = NetworkWrapper;
-			sourceTree = "<group>";
-		};
-		4AC9394428BA3F8000100D75 /* MockDataExtractor */ = {
-			isa = PBXGroup;
-			children = (
-				4AC9394528BA3FC300100D75 /* MockDataExtractor.swift */,
-				4AC9394C28BA426400100D75 /* PetsMockGenerator.swift */,
-				4AC9394E28BA42F900100D75 /* ConfigMockGenerator.swift */,
-			);
-			path = MockDataExtractor;
-			sourceTree = "<group>";
-		};
-		4AC9394728BA41AA00100D75 /* MockJSON */ = {
-			isa = PBXGroup;
-			children = (
-				4AC9394928BA41EA00100D75 /* config.json */,
-				4AC9394828BA41EA00100D75 /* pets.json */,
-			);
-			path = MockJSON;
 			sourceTree = "<group>";
 		};
 		4AC9396128BA5CC700100D75 /* Cells */ = {
@@ -370,9 +339,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4AC9391528BA364C00100D75 /* Preview Assets.xcassets in Resources */,
-				4AC9394B28BA41EA00100D75 /* config.json in Resources */,
 				4AC9391228BA364C00100D75 /* Assets.xcassets in Resources */,
-				4AC9394A28BA41EA00100D75 /* pets.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -401,15 +368,12 @@
 				4AC9396328BA5E3400100D75 /* PetCellView.swift in Sources */,
 				4A04069D28BF2D440021D82A /* LoadingStates.swift in Sources */,
 				4AC9395E28BA585800100D75 /* ConfigNetwork.swift in Sources */,
-				4AC9394F28BA42F900100D75 /* ConfigMockGenerator.swift in Sources */,
 				4AC9393B28BA378100100D75 /* VCConfiguration.swift in Sources */,
-				4AC9394628BA3FC300100D75 /* MockDataExtractor.swift in Sources */,
 				4AC9393928BA375400100D75 /* VCPets.swift in Sources */,
 				4AC9396028BA5B0800100D75 /* HomeViewModel.swift in Sources */,
 				4A8DB02928BCF965009C0367 /* ImageLoader.swift in Sources */,
 				4A8DB02B28BCFA7F009C0367 /* AsyncImage.swift in Sources */,
 				4A8DB02F28BCFC33009C0367 /* ImageCache.swift in Sources */,
-				4AC9394D28BA426400100D75 /* PetsMockGenerator.swift in Sources */,
 				4A04069728BF002E0021D82A /* InternetMonitor.swift in Sources */,
 				4AC9396528BA69F600100D75 /* PetDetailView.swift in Sources */,
 				4AC9394328BA3E2800100D75 /* PetsNetwork.swift in Sources */,

@@ -58,29 +58,5 @@ class ConfigTests: XCTestCase {
             }
         }
     }
-    
-    
-    //MARK: API Mock GetConfigData
-
-    func testMockGetConfigData() {
-        let expec = expectation(description: "test ConfigData request")
-        TestConfigNetwork.getConfigData { result in
-            switch result {
-            case .failure(let error):
-                XCTFail("ConfigData request failed \(error.localizedDescription)")
-                expec.fulfill()
-            case .success(let config):
-                print("ConfigData success \(config.settings )")
-                expec.fulfill()
-            }
-        }
-        
-        waitForExpectations(timeout: 2.0) { error in
-            if let error = error {
-                print("Error: \(error.localizedDescription)")
-            }
-        }
-        
-    }
 
 }

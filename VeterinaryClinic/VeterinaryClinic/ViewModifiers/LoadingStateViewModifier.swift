@@ -16,6 +16,7 @@ struct LoadingStateModifier<IndicatorView: View>: ViewModifier {
     
     @State private var showActivityIndicator: Bool = false
     @State private var errorMessage: IdentifiableObject<String>?
+    @State private var infoMessage: IdentifiableObject<[String]>?
     
     func body(content: Content) -> some View {
         ZStack {
@@ -35,6 +36,10 @@ struct LoadingStateModifier<IndicatorView: View>: ViewModifier {
             Alert(title: Text("Error"), message: Text("\(error.value)"), dismissButton: nil)
         } )
         
+        .alert(item: $infoMessage, content:{ infoMsg in
+            Alert(title: Text("\(String(format: "%@", infoMsg.value.first!))"), message: Text("\(String(format: "%@", infoMsg.value.last!))"), dismissButton: nil)
+        } )
+        
         .onReceive(loadingState, perform: { loadingState in
             switch loadingState {
             case .idle:
@@ -44,6 +49,9 @@ struct LoadingStateModifier<IndicatorView: View>: ViewModifier {
             case .failed(let errorString):
                 showActivityIndicator = false
                 errorMessage = IdentifiableObject(errorString)
+            case .infoMessage(let title, let message):
+                showActivityIndicator = false
+                infoMessage = IdentifiableObject([title,message])
             }
         })
     }
