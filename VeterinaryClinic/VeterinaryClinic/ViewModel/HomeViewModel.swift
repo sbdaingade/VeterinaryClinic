@@ -84,13 +84,15 @@ public class HomeViewModel: ObservableObject {
         }
     }
         
-    func validateWithInOfficeTime(workingHours: String, currentDate: Date) -> Bool {
+    func validateWithInOfficeTime(workingHours: String?, currentDate: Date? = Date()) -> Bool {
         //"workHours": "M-F 9:00 - 18:00"
+        guard let workingHours = workingHours else { return false }
+        
         let now = currentDate
         let settings: String? = workingHours
         guard let hRange = settings?.components(separatedBy: " ") else { return false }
         
-        let components = Calendar.current.dateComponents([.weekday], from: now)
+        let components = Calendar.current.dateComponents([.weekday], from: now!)
         let weekday = components.weekday ?? 0
         
         switch weekday {
@@ -115,7 +117,7 @@ public class HomeViewModel: ObservableObject {
                 bySettingHour: sSettingHour!,
                 minute: sMinute!,
                 second: 0,
-                of: now)!
+                of: now!)!
             
             let maxTimeArray =  hRange.last!.components(separatedBy: ":")
             let mSettingHour = Int(maxTimeArray.first!)
@@ -125,9 +127,9 @@ public class HomeViewModel: ObservableObject {
                 bySettingHour: mSettingHour!,
                 minute: mMinute!,
                 second: 0,
-                of: now)!
+                of: now!)!
             
-            if now >= min_today && now <= max_today  {
+            if now! >= min_today && now! <= max_today  {
                 debugPrint("The time is between \(startTimeArray) and \(maxTimeArray)")
                 return true
             } else {
